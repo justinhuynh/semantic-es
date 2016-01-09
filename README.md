@@ -54,3 +54,18 @@ Don't overwrite the `self.search(query)` as shown in the `elasticsearch-rails` r
 ### Learning More
 
 Clone down the [elasticsearch-model](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model) repo and work with the examples in the `examples` folder
+
+Note - you will need to create a `pry` history file for this to work. Otherwise, your example will fail on this line:
+
+```
+Pry.config.history.file = File.expand_path('../../tmp/elasticsearch_development.pry', __FILE__)
+```
+
+In the `elasticsearch-model` folder:
+
+```
+mkdir tmp
+touch tmp/elasticsearch_development.pry
+```
+
+Run `ruby examples/activerecord_article.rb` to get started
