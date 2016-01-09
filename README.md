@@ -6,8 +6,8 @@ Searchkick is an amazing and well-maintained resource (as of 2016), but I was in
 
 Many of the alternative wrappers or interfaces for Elasticsearch have largely been abandoned, so I decided to try working directly with some of the interfaces provided by Elasticsearch:
 
-[elasticsearch-rails](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-rails)
-[elasticsearch-model](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model)
+[elasticsearch-rails](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-rails)  
+[elasticsearch-model](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model)  
 [elasticsearch-ruby](https://github.com/elastic/elasticsearch-ruby)
 
 This tutorial is geared toward beginners with some familiarity with Rails and ActiveRecord, but have otherwise not implemented external search solutions.
@@ -15,6 +15,7 @@ This tutorial is geared toward beginners with some familiarity with Rails and Ac
 ### Elasticsearch Setup for Development
 
 Elasticsearch runs as a Java-based server on your local machine.
+
 Run `brew install elasticsearch` to get started.
 
 ### Configuring Elasticsearch
@@ -25,3 +26,31 @@ Run `brew install elasticsearch` to get started.
 * Elasticsearch marvel
 * A quick primer on Elasticsearch API
 * Start elasticsearch on your local machine to spool up a server (similar to how you would connect to a database)
+
+### Quick Start Steps
+
+* Set up new rails app
+* Add `elasticsearch-rails` and `elasticsearch-model` to your `Gemfile`
+
+```
+bundle install
+rake db:create
+rails g migration create_articles`
+* (write your migration)
+```
+
+```
+rake db:migrate
+
+rails c
+Article.connection
+Article.__elasticsearch__.create_index!
+Article.import
+response = Article.search 'fox dogs'
+```
+
+Don't overwrite the `self.search(query)` as shown in the `elasticsearch-rails` readme unless you have your own implementation.
+
+### Learning More
+
+Clone down the [elasticsearch-model](https://github.com/elastic/elasticsearch-rails/tree/master/elasticsearch-model) repo and work with the examples in the `examples` folder
